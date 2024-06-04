@@ -2,11 +2,15 @@ import createElement from '../helpers/domHelper';
 import renderArena from './arena';
 import versusImg from '../../../resources/versus.png';
 import { createFighterPreview } from './fighterPreview';
+import fighterService from '../services/fightersService';
 
 const fighterDetailsMap = new Map();
 
 export async function getFighterInfo(fighterId) {
     // get fighter info from fighterDetailsMap or from service and write it to fighterDetailsMap
+    const fighterInfo = await fighterService.getFighterDetails(fighterId);
+    fighterDetailsMap.set(fighterInfo, fighterInfo);
+    return fighterInfo;
 }
 
 function startFight(selectedFighters) {
@@ -39,11 +43,15 @@ function renderSelectedFighters(selectedFighters) {
     const fightersPreview = document.querySelector('.preview-container___root');
     const [playerOne, playerTwo] = selectedFighters;
     const firstPreview = createFighterPreview(playerOne, 'left');
-    const secondPreview = createFighterPreview(playerTwo, 'right');
+    // const secondPreview = playerTwo && createFighterPreview(playerTwo, 'right');
+    const secondPreview = playerTwo
+        ? createFighterPreview(playerTwo, 'right')
+        : createFighterPreview({ name: 'And next our FIGHTER!!!' }, 'right');
+
     const versusBlock = createVersusBlock(selectedFighters);
 
     fightersPreview.innerHTML = '';
-    fightersPreview.append(firstPreview, versusBlock, secondPreview);
+    fightersPreview.append(firstPreview, versusBlock, secondPreview); // secondPreview || ''
 }
 
 export function createFightersSelector() {
