@@ -5,7 +5,13 @@
 }
 
 .fighter-preview___right {
+
+
   align-items: flex-end;
+}
+
+.fighter-preview___right img {
+  transform: scaleX(-1);
 }
 
 .fighter-preview___left {

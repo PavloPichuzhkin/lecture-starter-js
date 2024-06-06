@@ -9,24 +9,44 @@ export function createFighterPreview(fighter, position) {
 
     const { _id: id, name, health, attack, defense, source } = fighter;
     // todo: show fighter info (image, name, health, etc.)
+    const attributes = {
+        style: 'font-size: 32px; color: #470303; font-weight: 700;'
+    };
+
+    const imgElement = createFighterImage(fighter);
+    fighterElement.appendChild(imgElement);
 
     const nameElement = createElement({
-        tagName: 'div'
-        // className: `fighter-preview___root ${positionClassName}`
+        tagName: 'span',
+        className: ``,
+        attributes
     });
-    nameElement.innerText = `${id}. - ${name}`;
+    nameElement.innerText = ` ${name}`;
+    fighterElement.appendChild(nameElement);
+
     const healthElement = createElement({
-        tagName: 'div',
-        className: `fighter-preview___root ${positionClassName}`,
-        attributes: {
-            style: 'font-size: 32px; color: red;'
-        }
+        tagName: 'span',
+        className: `${positionClassName}`,
+        attributes
     });
-    healthElement.innerText = `${health} level`;
+    healthElement.innerText = `Health ${health}`;
+    fighterElement.appendChild(healthElement);
 
-    fighterElement.innerHTML = '';
+    const attackElement = createElement({
+        tagName: 'span',
+        className: `${positionClassName}`,
+        attributes
+    });
+    attackElement.innerText = `Attack: ${attack}`;
+    fighterElement.appendChild(attackElement);
 
-    fighterElement.append(nameElement, healthElement);
+    const defenseElement = createElement({
+        tagName: 'span',
+        className: `${positionClassName}`,
+        attributes
+    });
+    defenseElement.innerText = `Defense: ${defense}`;
+    fighterElement.appendChild(defenseElement);
 
     return fighterElement;
 }
