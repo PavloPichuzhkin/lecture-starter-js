@@ -47,11 +47,11 @@ function createVersusBlock(selectedFighters) {
 function renderSelectedFighters(selectedFighters) {
     const fightersPreview = document.querySelector('.preview-container___root');
     const [playerOne, playerTwo] = selectedFighters;
+
     const firstPreview = createFighterPreview(playerOne, 'left');
-    // const secondPreview = playerTwo && createFighterPreview(playerTwo, 'right');
     const secondPreview = playerTwo
         ? createFighterPreview(playerTwo, 'right')
-        : createFighterPreview({ name: 'And next our FIGHTER!!!' }, 'right');
+        : createFighterPreview('And next our FIGHTER!!!', 'right');
 
     const versusBlock = createVersusBlock(selectedFighters);
 

@@ -2,7 +2,6 @@ import controls from '../../constants/controls';
 import { arrayHasAllElementsOfArr, canCriticalHit, isEqualKeys, throttle } from '../helpers/utils';
 
 export function getHitPower(fighter, critical) {
-    // return hit power
     if (critical) {
         return fighter.attack * 2;
     }
@@ -10,23 +9,18 @@ export function getHitPower(fighter, critical) {
 }
 
 export function getBlockPower(fighter) {
-    // return block power
     return fighter.defense * (Math.random() + 1);
 }
 
 export function getDamage(attacker, defender) {
-    // return damage
     const damage = getHitPower(attacker) - getBlockPower(defender);
     return damage > 0 ? damage : 0;
 }
 
 export async function fight(firstFighter, secondFighter) {
     return new Promise(resolve => {
-        // resolve the promise with the winner when fight is over
         const healthBarsContainer = document.getElementsByClassName('arena___health-bar');
         const healthBars = [...healthBarsContainer];
-        // const statusViewContainer = document.getElementsByClassName('arena___health-indicator');
-        // const statusViews = [...statusViewContainer];
         const statusInfo = {
             block: false,
             criticalHitTime: Date.now(),
@@ -38,7 +32,6 @@ export async function fight(firstFighter, secondFighter) {
             ...statusInfo,
             currentHealth: firstFighter.health,
             healthBar: healthBars[0],
-            // statusView: statusViews[0],
             position: 'left'
         };
 
@@ -47,8 +40,6 @@ export async function fight(firstFighter, secondFighter) {
             ...statusInfo,
             currentHealth: secondFighter.health,
             healthBar: healthBars[1],
-
-            // statusView: statusViews[1],
             position: 'right'
         };
 
